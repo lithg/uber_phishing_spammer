@@ -9,12 +9,13 @@ def main():
     fake = Faker('pt_BR')
     options = Options()
     options.headless = True
-    driver = webdriver.Firefox(options=options)  # seu path do driver
+    driver = webdriver.Firefox()  # seu path do driver
     driver.get('https://br.ubberbrz.store/acesso/registro.php')
     time.sleep(3)
 
     try:
 
+        print('INÍCIO')
         driver.find_element_by_name('fnameQ').send_keys(fake.first_name())
         driver.find_element_by_name('lnameQ').send_keys(fake.last_name())
 
@@ -30,11 +31,11 @@ def main():
 
         driver.find_element_by_name('cpfC').send_keys(fake.cpf())
 
-        driver.find_element_by_name('cc').send_keys(fake.credit_card_number(card_type=None))
+        driver.find_element_by_name('cc').send_keys(fake.credit_card_number(card_type="visa"))
 
         driver.find_element_by_name('exp').send_keys(fake.credit_card_expire(start="now", end="+10y", date_format="%m/%y"))
 
-        driver.find_element_by_name('cvv').send_keys(fake.credit_card_security_code(card_type=None))
+        driver.find_element_by_name('cvv').send_keys(fake.credit_card_security_code(card_type="visa"))
 
         driver.find_element_by_id('btnAppl').click()
         time.sleep(2)
@@ -45,6 +46,7 @@ def main():
 
         driver.find_element_by_id('btnSenha').click()
 
+        print('FIM')
         driver.close()
 
     except:
@@ -53,11 +55,8 @@ def main():
 
 schedule.every().minute.at(":17").do(main)
 
-
 while True:
-       schedule.run_pending()
-       time.sleep(1)
-
-
+    schedule.run_pending()
+    time.sleep(1)
 
 
