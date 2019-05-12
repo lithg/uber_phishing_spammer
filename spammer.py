@@ -9,7 +9,7 @@ def main():
     fake = Faker('pt_BR')
     options = Options()
     options.headless = True
-    driver = webdriver.Firefox()  # seu path do driver
+    driver = webdriver.Firefox(options=Options)  # seu path do driver
     driver.get('https://br.ubberbrz.store/acesso/registro.php')
     time.sleep(3)
 
