@@ -11,7 +11,7 @@ def main():
     options.headless = True
     driver = webdriver.Firefox()  # seu path do driver
     #driver = webdriver.Firefox(options=options) # headless mode
-    driver.get('https://br.ubberbrz.store/acesso/registro.php')
+    driver.get('https://br.ubberbrz.store/acesso/registro.php') # url desabilitada
     time.sleep(3)
 
     try:
